@@ -1,0 +1,239 @@
+.video-section {
+    padding: 4rem 0 6rem;
+    background: #fff;
+}
+
+.video-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.video-header {
+    margin-bottom: 3rem;
+}
+
+.video-title {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+}
+
+.video-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.video-main-stage {
+    margin-bottom: 2rem;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.video-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px solid var(--accent);
+    border-radius: 30px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.video-frame-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-status-bar {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #444;
+}
+
+.playing-now {
+    font-weight: 700;
+    color: var(--primary);
+    margin-right: 0.5rem;
+}
+
+.playing-title {
+    font-style: italic;
+}
+
+/* Playlist Grid */
+.playlist-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.playlist-item {
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.playlist-item:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.playlist-item.active {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.playlist-thumbnail-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.8rem;
+    aspect-ratio: 16 / 9;
+}
+
+.playlist-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.playlist-item:hover .play-overlay,
+.playlist-item.active .play-overlay {
+    opacity: 1;
+}
+
+.playlist-item.active .play-overlay {
+    background: var(--primary);
+}
+
+.playlist-item.active .playlist-thumbnail-wrapper {
+    border: 3px solid var(--primary);
+}
+
+.playlist-item-title {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .video-section {
+        padding: 2rem 0 4rem;
+    }
+
+    .video-container {
+        padding: 0 1rem;
+    }
+
+    .video-title {
+        font-size: 2rem;
+    }
+
+    .video-wrapper {
+        border-radius: 15px;
+    }
+
+    .video-wrapper::before {
+        display: none;
+        /* Remove flashy border on mobile to save space */
+    }
+
+    .playlist-container {
+        gap: 1rem;
+        /* Force larger items on mobile for better touch targets */
+        grid-template-columns: 1fr;
+    }
+
+    .playlist-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #f9f9f9;
+        padding: 0.5rem;
+        border-radius: 10px;
+        opacity: 0.9;
+    }
+
+    .playlist-item.active {
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: none;
+        /* Disable scale on mobile */
+        opacity: 1;
+        border: 1px solid var(--primary);
+    }
+
+    .playlist-thumbnail-wrapper {
+        width: 120px;
+        min-width: 120px;
+        margin-bottom: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .playlist-item-title {
+        font-size: 1rem;
+    }
+
+    /* Hide the big play overlay on small thumbs in this layout */
+    .play-overlay {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}

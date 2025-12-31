@@ -1,13 +1,114 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+  /* Brand Colors - Organic Palette */
+  --primary: #2E7D32;
+  /* Forest Green */
+  --primary-dark: #1B5E20;
+  /* Deep Leaf */
+  --primary-light: #558B2F;
+  /* Fresh Grass */
+  --accent: #FF6F00;
+  /* Sunset Orange */
+  --soil: #5D4037;
+  /* Earth Brown */
+  --sand: #F5F5DC;
+  /* Beige/Sand */
+
+  /* Neutral Colors */
+  --bg-dark: #1B2E21;
+  /* Dark Greenish Black */
+  --bg-light: #FAFAF5;
+  /* Off-white / Cream */
+  --text-dark: #2C3E50;
+  --text-light: #FFFFFF;
+  --gray-100: #F1F8E9;
+  /* Lightest Green Tint */
+  --gray-200: #DCEDC8;
+
+  /* UI Elements */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-organic: 30px 4px 30px 4px;
+  /* Leaf shape */
+  --shadow-sm: 0 4px 6px -1px rgba(46, 125, 50, 0.1);
+  --shadow-md: 0 10px 15px -3px rgba(46, 125, 50, 0.15);
+  --shadow-lg: 0 20px 25px -5px rgba(27, 94, 32, 0.2);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+[data-theme='dark'] {
+  --bg-light: #0d1f12;
+  /* Deep forest night */
+  --bg-dark: #05100a;
+  /* Darker black-green */
+  --text-dark: #e8f5e9;
+  /* Light green-white text */
+  --text-light: #b9f6ca;
+  --gray-100: #1b2e21;
+  /* Card bg in dark mode */
+  --gray-200: #2e4c36;
+  --sand: #14251a;
+
+  --primary: #4caf50;
+  /* Brighter green for contrast against dark */
+  --primary-dark: #a5d6a7;
+  /* Lighter green for headings */
+  --primary-light: #81c784;
+
+  --accent: #ff9800;
+  /* Brighter orange */
+
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-light);
+  /* Subtle grain texture using CSS gradient noise pattern simulation */
+  background-image:
+    radial-gradient(#2E7D32 0.5px, transparent 0.5px),
+    radial-gradient(#2E7D32 0.5px, var(--bg-light) 0.5px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  /* Make it very subtle */
+  background-blend-mode: multiply;
+
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+button {
+  font-family: 'Outfit', sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

@@ -1,0 +1,246 @@
+/* HERO SECTION - SPLIT LAYOUT */
+.hero-split {
+  min-height: 90vh;
+  /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 4rem;
+  /* More horizontal padding */
+  background: white;
+  /* Clean background */
+  overflow: hidden;
+  position: relative;
+  gap: 4rem;
+  /* Increased gap */
+  max-width: 1600px;
+  /* Allow wider layout */
+  margin: 0 auto;
+  /* Center */
+}
+
+/* LEFT COLUMN - TEXT */
+.hero-text {
+  flex: 1.2;
+  /* Slightly more weight for text */
+  max-width: 800px;
+  /* Increased from 600px */
+  text-align: left;
+  z-index: 2;
+  animation: slideInLeft 1s ease-out;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  /* Larger Text Range */
+  line-height: 1.05;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Decorative underline for H1 */
+/* Decorative underline for H1 */
+.hero-text h1::after {
+  content: "";
+  display: block;
+  width: 120px;
+  /* Slightly longer */
+  height: 6px;
+  background: var(--accent);
+  margin-top: 15px;
+  /* More breathing room */
+  margin-left: 0;
+  /* Strict left align */
+  border-radius: 4px;
+}
+
+.hero-text h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: #555;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+}
+
+.location-text {
+  font-size: 1.25rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+  /* Tighter spacing to owners */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Tighter icon gap */
+  font-weight: 500;
+}
+
+.owners-badge {
+  display: block;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+.owners-badge strong {
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-style: normal;
+}
+
+/* BUTTONS */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-hero-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 20px 48px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-hero-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(46, 125, 50, 0.5);
+}
+
+/* RIGHT COLUMN - IMAGE */
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  animation: floatImage 6s ease-in-out infinite;
+}
+
+.hero-img-main {
+  width: 100%;
+  max-width: 900px;
+  /* Large size */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(46, 125, 50, 0.3));
+  /* Rich shadow */
+  /* Remove transform: none to let animation work */
+  transition: transform 0.3s ease;
+}
+
+.hero-img-main:hover {
+  transform: scale(1.02) rotate(1deg);
+  /* Subtle interaction */
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-split {
+    flex-direction: column-reverse;
+    /* Text on top on mobile? Or image on top. Usually text first is better for SEO/UX, but users like images. Let's stack image on bottom or top? User said 'vegetable at bottom' before. Let's keep typical flow: Text top, Image bottom on mobile. */
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2rem;
+  }
+
+  .hero-text {
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .hero-text h1::after {
+    margin: 10px auto;
+    /* Center underline */
+  }
+
+  .location-text {
+    justify-content: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+/* ANIMATIONS */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatImage {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  animation: bounce 2s infinite;
+  font-size: 2rem;
+  color: var(--primary-dark);
+  /* Dark color for light background */
+  cursor: pointer;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}

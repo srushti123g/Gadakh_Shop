@@ -1,0 +1,482 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vegetables-container {
+    padding: 4rem 0;
+}
+
+.vegetables-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 3rem;
+    color: var(--primary-dark);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.vegetables-title::after {
+    content: "";
+    /* Decorative underline */
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
+.vegetables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    /* 220px allows 2 columns on >480px, but 1 col on very small */
+    /* Let's try to be more flexible. minmax(160px, 1fr) gives 2 columns on 360px+ screens */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    /* Keep 1 col for better detail view on mobile, but tight */
+    gap: 2.5rem;
+    padding: 0 1rem;
+}
+
+@media (max-width: 600px) {
+    .vegetables-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* Force 2 columns on mobile */
+        gap: 1rem;
+        /* Smaller gap */
+        padding: 0 0.5rem;
+    }
+
+    .veg-info {
+        padding: 1rem;
+    }
+
+    .veg-name {
+        font-size: 1.1rem;
+    }
+
+    /* Disable card animation on mobile to ensure visibility */
+    .veg-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+.veg-card {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy transition */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    animation: fadeInUp 0.6s ease-out backwards;
+    /* Entrance animation */
+}
+
+/* Stagger animation based on child index (would need specific CSS or JS, here just base) */
+.veg-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 30px -10px rgba(46, 125, 50, 0.2);
+    /* Green tinted shadow */
+    border-color: var(--primary-light);
+}
+
+.veg-image-container {
+    height: 220px;
+    overflow: hidden;
+    background-color: var(--gray-100);
+    position: relative;
+}
+
+.veg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.veg-card:hover .veg-image {
+    transform: scale(1.15) rotate(1deg);
+    /* Subtle rotation */
+}
+
+.veg-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.veg-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.veg-card:hover .veg-name {
+    color: var(--primary);
+}
+
+.veg-overlay {
+    position: absolute;
+    bottom: 20px;
+    /* Moved to bottom for better thumb reach/visibility on cover */
+    right: 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+/* SEARCH & FILTER CONTROLS */
+.controls-wrapper {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #555;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* CARD ENHANCEMENTS */
+.veg-image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.badge-exotic {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #e65100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.badge-nutrition {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(240, 244, 255, 0.95);
+    border: 1px solid rgba(21, 101, 192, 0.1);
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1565c0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    white-space: nowrap;
+}
+
+.chef-tip {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    background: #f1f8e9;
+    padding: 0.5rem;
+    border-radius: 8px;
+    line-height: 1.4;
+}
+
+/* Adjust card for new content */
+.veg-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .controls-wrapper {
+        padding: 0 1rem;
+    }
+
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* CART & ORDER BUILDER STYLES */
+.cart-controls {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-add-cart {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+}
+
+.btn-add-cart:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+}
+
+.qty-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f1f8e9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 50px;
+    border: 1px solid var(--primary-light);
+}
+
+.btn-qty {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: var(--primary-dark);
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.btn-qty.plus {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-qty:active {
+    transform: scale(0.9);
+}
+
+.qty-display {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-dark);
+    min-width: 20px;
+    text-align: center;
+}
+
+.veg-card.selected {
+    border: 2px solid var(--primary);
+    background: #f1f8e9;
+}
+
+/* FLOATING CHECKOUT BUTTON */
+.floating-checkout {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary-dark);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: bounceIn 0.6s ease-out;
+    font-family: 'Outfit', sans-serif;
+}
+
+.floating-checkout:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #1b5e20;
+    box-shadow: 0 15px 40px rgba(27, 94, 32, 0.4);
+}
+
+.checkout-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .floating-checkout {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        /* Full width on mobile */
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+    }
+}
+
+.btn-recipe-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-dark);
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+}
+
+.veg-card:hover .btn-recipe-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.btn-recipe-overlay:hover {
+    background: var(--primary);
+    color: white;
+    transform: translate(-50%, -50%) scale(1.1);
+}
