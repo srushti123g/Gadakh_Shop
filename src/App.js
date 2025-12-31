@@ -161,14 +161,15 @@ function InnerApp() {
           <p>&copy; {new Date().getFullYear()} Gadakh Vegetable Shop. Grown with ❤️ in India.</p>
         </div>
       </footer>
-      <a
-  href={`https://wa.me/${t.contact?.phone?.[0] || '9860035883'}`}
+     <a
+  href="https://wa.me/919860035883"
   className="whatsapp-float"
   target="_blank"
   rel="noreferrer"
 >
   <span className="whatsapp-icon">💬</span>
 </a>
+
 
     </div>
   );
