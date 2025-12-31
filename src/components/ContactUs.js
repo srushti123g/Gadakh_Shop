@@ -47,35 +47,16 @@ function ContactUs() {
         {/* Social Actions */}
         <div className="social-actions" style={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
 
-{/* WhatsApp */}
-{shopInfo?.whatsapp?.length > 0
-  ? shopInfo.whatsapp.map((num, index) => {
-      // Ensure number is in correct format: remove spaces/dashes
-      const cleanNum = num.replace(/\D/g, '');
-      return (
-        <a
-          key={index}
-          href={`https://wa.me/${cleanNum}`}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-whatsapp-large"
-        >
-          <span>💬 {t.contact.chat || "Chat Now"}</span>
-        </a>
-      );
-    })
-  : (
-    // Fallback single number
-    <a
-      href="https://wa.me/919860035883"
-      target="_blank"
-      rel="noreferrer"
-      className="btn-whatsapp-large"
-    >
-      <span>💬 {t.contact.chat || "Chat Now"}</span>
-    </a>
-  )
-}
+{/* Single WhatsApp Button */}
+<a
+  href={`https://wa.me/${shopInfo.whatsapp?.[0]?.replace(/\D/g, '') || '919860035883'}`}
+  target="_blank"
+  rel="noreferrer"
+  className="btn-whatsapp-large"
+>
+  <span>💬 {t.contact.chat || "Chat Now"}</span>
+</a>
+
 
 
           {/* Social Links */}
